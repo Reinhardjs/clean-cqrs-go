@@ -1,4 +1,4 @@
-package responses
+package dto
 
 type HttpResponse struct {
 	Status  int         `json:"status"`

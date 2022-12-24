@@ -10,11 +10,11 @@ import (
 )
 
 type Config struct {
-	Host     string `yaml:"host"`
-	DBName   string `yaml:"dbName"`
-	User     string `yaml:"user"`
-	Password string `yaml:"password"`
-	SSLMode  bool   `yaml:"sslMode"`
+	Host     string
+	DBName   string
+	User     string
+	Password string
+	SSLMode  string
 }
 
 const (
@@ -27,7 +27,7 @@ const (
 )
 
 func NewPostgresConn(cfg *Config) (*gorm.DB, error) {
-	dbUri := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=%s password=%s", cfg.Host, cfg.User, cfg.DBName, cfg.sslMode, cfg.Password)
+	dbUri := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=%s password=%s", cfg.Host, cfg.User, cfg.DBName, cfg.SSLMode, cfg.Password)
 
 	conn, err := gorm.Open("postgres", dbUri)
 

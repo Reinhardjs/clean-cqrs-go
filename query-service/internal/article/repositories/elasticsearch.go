@@ -22,18 +22,7 @@ type elasticSearchRepository struct {
 	client *elastic.Client
 }
 
-func NewElastic(url string) (ElasticSearchRepository, error) {
-	client, err := elastic.NewClient(elastic.Config{
-		Addresses: []string{url},
-	})
-	if err != nil {
-		return nil, errors.Wrap(err, "query-service.article.repository.elasticsearch.NewClient")
-	}
-
-	_, err = client.Info()
-	if err != nil {
-		return nil, errors.Wrap(err, "query-service.article.repository.elasticsearch.client.Info")
-	}
+func NewElastic(client *elastic.Client) (ElasticSearchRepository, error) {
 
 	return &elasticSearchRepository{client}, nil
 }

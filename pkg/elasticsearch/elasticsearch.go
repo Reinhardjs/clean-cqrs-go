@@ -1,4 +1,4 @@
-package postgres
+package elasticsearch
 
 import (
 	elastic "github.com/elastic/go-elasticsearch/v7"

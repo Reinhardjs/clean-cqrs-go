@@ -5,7 +5,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-func NewPostgresConn() (redis.Conn, error) {
+func NewRedisConn() (redis.Conn, error) {
 	conn, err := redis.Dial("tcp", "localhost:6379")
 
 	if err != nil {

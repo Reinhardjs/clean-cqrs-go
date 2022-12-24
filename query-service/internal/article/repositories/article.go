@@ -2,12 +2,12 @@ package repositories
 
 import (
 	"encoding/json"
-	"fmt"
 	"strconv"
 
 	"github.com/Reinhardjs/golang-alpha-indo-soft/internal/models"
 	"github.com/gomodule/redigo/redis"
 	"github.com/jinzhu/gorm"
+	"github.com/pkg/errors"
 )
 
 type ArticleRepository interface {
@@ -32,19 +32,19 @@ func (e *articleRepository) ReadAll() (*[]models.Article, error) {
 
 	if err != nil {
 		// Failed getting data from redis
-		return nil, err
+		return nil, errors.Wrap(err, "query-service.article.repository.redis.getAll")
 	}
 
 	if redisResult == nil {
 
 		err := e.DB.Table("articles").Find(&articles).Error
 		if err != nil {
-			return nil, fmt.Errorf("DB error : %v", err)
+			return nil, errors.Wrap(err, "query-service.article.repository.DB.findAll")
 		}
 
 		articleJSON, err := json.Marshal(articles)
 		if err != nil {
-			return nil, err
+			return nil, errors.Wrap(err, "query-service.article.repository.json.marshal")
 		}
 
 		// Save JSON blob to Redis
@@ -52,9 +52,11 @@ func (e *articleRepository) ReadAll() (*[]models.Article, error) {
 
 		if saveRedisError != nil {
 			// Failed saving data to redis
-			return nil, saveRedisError
+			return nil, errors.Wrap(saveRedisError, "query-service.article.repository.redis.setAll")
 		}
+
 	} else {
+
 		json.Unmarshal(redisResult.([]byte), &articles)
 	}
 
@@ -69,7 +71,7 @@ func (e *articleRepository) ReadById(id int) (*models.Article, error) {
 
 	if err != nil {
 		// Failed getting data from redis
-		return nil, err
+		return nil, errors.Wrap(err, "query-service.article.repository.redis.get")
 	}
 
 	if redisResult == nil {
@@ -81,8 +83,9 @@ func (e *articleRepository) ReadById(id int) (*models.Article, error) {
 		}
 
 		articleJSON, err := json.Marshal(article)
+
 		if err != nil {
-			return nil, err
+			return nil, errors.Wrap(err, "query-service.article.repository.json.marshal")
 		}
 
 		// Save JSON blob to Redis
@@ -90,9 +93,10 @@ func (e *articleRepository) ReadById(id int) (*models.Article, error) {
 
 		if saveRedisError != nil {
 			// Failed saving data to redis
-			return nil, saveRedisError
+			return nil, errors.Wrap(saveRedisError, "query-service.article.repository.redis.set")
 		}
 	} else {
+
 		json.Unmarshal(redisResult.([]byte), &article)
 	}
 

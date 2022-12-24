@@ -1,11 +1,10 @@
 package repositories
 
 import (
-	"fmt"
-
 	"github.com/Reinhardjs/golang-alpha-indo-soft/internal/models"
 	"github.com/gomodule/redigo/redis"
 	"github.com/jinzhu/gorm"
+	"github.com/pkg/errors"
 )
 
 type ArticleRepository interface {
@@ -25,14 +24,14 @@ func (e *articleRepository) Create(article *models.Article) (*models.Article, er
 	result := e.DB.Model(&models.Article{}).Create(article)
 
 	if result.Error != nil {
-		return &models.Article{}, fmt.Errorf("DB error : %v", result.Error)
+		return &models.Article{}, errors.Wrap(result.Error, "command-service.article.repository.DB.create")
 	}
 
 	_, redisDeleteAllErr := e.RedisClient.Do("DEL", "article:all")
 
 	if redisDeleteAllErr != nil {
 		// Failed deleting data (article:all) from redis
-		return nil, redisDeleteAllErr
+		return nil, errors.Wrap(redisDeleteAllErr, "command-service.article.repository.redis.deleteAll")
 	}
 
 	return article, nil

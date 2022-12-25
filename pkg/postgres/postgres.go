@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/pkg/errors"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 type Config struct {
@@ -29,7 +29,7 @@ const (
 func NewPostgresConn(cfg *Config) (*gorm.DB, error) {
 	dbUri := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=%s password=%s", cfg.Host, cfg.User, cfg.DBName, cfg.SSLMode, cfg.Password)
 
-	conn, err := gorm.Open("postgres", dbUri)
+	conn, err := gorm.Open(postgres.Open(dbUri), &gorm.Config{})
 
 	if err != nil {
 		return nil, errors.Wrap(err, "pgx.ConnectConfig")

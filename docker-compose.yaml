@@ -2,9 +2,9 @@ version: "3.7"
 
 services:
 
-  nats:
-    image: nats-streaming:0.17.0
-    restart: always
+  # nats:
+  #   image: nats-streaming:0.17.0
+  #   restart: always
 
   command:
     container_name: command-service
@@ -20,22 +20,12 @@ services:
       POSTGRES_SSLMODE: require
       REDIS_HOST: "103.134.154.18"
       REDIS_PORT: "6379"
-      NATS_ADDRESS: http://nats:4222
+      NATS_ADDRESS: "http://103.134.154.18:31071"
       ELASTICSEARCH_ADDRESS: "https://my-deployment-2e0b30.es.asia-southeast1.gcp.elastic-cloud.com"
       ELASTICSEARCH_USERNAME: "elastic"
       ELASTICSEARCH_PASSWORD: "dBSqLPX1mKaUF6ezas8bvjMK"
     ports:
-      - 8080
-    depends_on:
-      - nats
-
-  nginx:
-    build: ./nginx
-    ports:
-      - "8080:80"
-    depends_on:
-      - command
-      - query
+      - "8080:8080"
 
   query:
     container_name: query-service
@@ -51,11 +41,9 @@ services:
       POSTGRES_SSLMODE: require
       REDIS_HOST: "103.134.154.18"
       REDIS_PORT: "6379"
-      NATS_ADDRESS: http://nats:4222
+      NATS_ADDRESS: "http://103.134.154.18:31071"
       ELASTICSEARCH_ADDRESS: "https://my-deployment-2e0b30.es.asia-southeast1.gcp.elastic-cloud.com"
       ELASTICSEARCH_USERNAME: "elastic"
       ELASTICSEARCH_PASSWORD: "dBSqLPX1mKaUF6ezas8bvjMK"
     ports:
-      - 8080
-    depends_on:
-      - nats
+      - "8081:8080"

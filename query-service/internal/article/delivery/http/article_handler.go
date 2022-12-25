@@ -76,3 +76,34 @@ func (e *ArticleController) GetArticle() http.Handler {
 		return nil
 	})
 }
+
+func (e *ArticleController) SearchArticle() http.Handler {
+	return internalHttp.RootHandler(func(rw http.ResponseWriter, r *http.Request) (err error) {
+		_, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+
+		defer cancel()
+
+		query := r.URL.Query().Get("query")
+
+		if len(query) == 0 {
+			return pkgErrors.NewHTTPError(nil, 400, "Missing query parameter")
+		}
+
+		if err != nil {
+			return pkgErrors.NewHTTPError(err, 400, "Invalid post id")
+		}
+
+		rw.Header().Add("Content-Type", "application/json")
+
+		posts, err := e.articleUsecase.Search(query)
+
+		if err != nil {
+			return err
+		}
+
+		response := dto.HttpResponse{Status: http.StatusOK, Message: "success", Data: posts}
+		rw.WriteHeader(response.Status)
+		json.NewEncoder(rw).Encode(response)
+		return nil
+	})
+}

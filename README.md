@@ -19,11 +19,13 @@ To run `command-service`
 ```
 go run command-service/cmd/main.go
 ```
+Then open `localhost:8080` on your browser
 
 To run `query-service` 
 ```
 go run query-service/cmd/main.go
 ```
+Then open `localhost:8080` on your browser
 
 ### Runing all in one using docker compoes (merged port with nginx reverse proxy)
 

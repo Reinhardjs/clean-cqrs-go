@@ -25,9 +25,17 @@ services:
       ELASTICSEARCH_USERNAME: "elastic"
       ELASTICSEARCH_PASSWORD: "dBSqLPX1mKaUF6ezas8bvjMK"
     ports:
-      - "8081:8080"
+      - 8080
     depends_on:
       - nats
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - command
+      - query
 
   query:
     container_name: query-service
@@ -48,6 +56,6 @@ services:
       ELASTICSEARCH_USERNAME: "elastic"
       ELASTICSEARCH_PASSWORD: "dBSqLPX1mKaUF6ezas8bvjMK"
     ports:
-      - "8080:8080"
+      - 8080
     depends_on:
       - nats

@@ -1,4 +1,4 @@
-# Clean & CQRS Architecture with Go
+# Clean CQRS Architecture with Go
 
 This is a simple Rest API of articles, built with CQRS and Clean Architecture implemented.
 

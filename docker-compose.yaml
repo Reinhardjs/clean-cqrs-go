@@ -11,8 +11,6 @@ services:
     build:
       context: .
       dockerfile: docker/command-service.Dockerfile
-    volumes:
-      - ./:/app
     restart: always
     environment:
       POSTGRES_HOST: "103.134.154.18"
@@ -36,8 +34,6 @@ services:
     build:
       context: .
       dockerfile: docker/query-service.Dockerfile
-    volumes:
-      - ./:/app
     restart: always
     environment:
       POSTGRES_HOST: "103.134.154.18"

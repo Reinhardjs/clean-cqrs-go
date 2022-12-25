@@ -9,6 +9,7 @@ import (
 	"github.com/Reinhardjs/golang-alpha-indo-soft/command-service/internal/article/repositories"
 	"github.com/Reinhardjs/golang-alpha-indo-soft/command-service/internal/article/usecases"
 	"github.com/Reinhardjs/golang-alpha-indo-soft/command-service/internal/server"
+	commonRepositories "github.com/Reinhardjs/golang-alpha-indo-soft/internal/repositories"
 	"github.com/gorilla/mux"
 	"github.com/pkg/errors"
 )
@@ -30,7 +31,8 @@ func main() {
 
 	// Initiating Article's Command Service
 	articleRepository := repositories.NewArticleRepository(s.PostgresConn, s.RedisConn)
-	articleUsecase := usecases.NewArticleUsecase(articleRepository)
+	natsRepository := commonRepositories.NewNatsRepository(s.NatsConn)
+	articleUsecase := usecases.NewArticleUsecase(articleRepository, natsRepository)
 	articleController := articleHttp.CreateArticleController(articleUsecase)
 
 	router := mux.NewRouter()

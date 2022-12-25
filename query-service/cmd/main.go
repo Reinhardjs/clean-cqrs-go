@@ -11,6 +11,8 @@ import (
 	"github.com/Reinhardjs/golang-alpha-indo-soft/query-service/internal/server"
 	"github.com/gorilla/mux"
 	"github.com/pkg/errors"
+
+	commonRepositories "github.com/Reinhardjs/golang-alpha-indo-soft/internal/repositories"
 )
 
 func main() {
@@ -29,13 +31,15 @@ func main() {
 	}
 
 	// Initiating Article's Command Service
+	searchRepository := commonRepositories.NewElasticRepository(s.ElasticSearchClient)
 	articleRepository := repositories.NewArticleRepository(s.PostgresConn, s.RedisConn)
-	articleUsecase := usecases.NewArticleUsecase(articleRepository)
+	articleUsecase := usecases.NewArticleUsecase(articleRepository, searchRepository)
 	articleController := articleHttp.CreateArticleController(articleUsecase)
 
 	router := mux.NewRouter()
 
 	router.Handle("/articles", articleController.GetArticles()).Methods("GET")
+	router.Handle("/articles/search", articleController.SearchArticle()).Methods("GET")
 
 	fmt.Println("starting web server at http://localhost:8080")
 	http.ListenAndServe(":8080", router)

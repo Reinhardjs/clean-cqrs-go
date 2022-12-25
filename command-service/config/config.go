@@ -8,6 +8,8 @@ import (
 	"github.com/Reinhardjs/golang-alpha-indo-soft/pkg/nats"
 	"github.com/Reinhardjs/golang-alpha-indo-soft/pkg/postgres"
 	"github.com/Reinhardjs/golang-alpha-indo-soft/pkg/redis"
+	"github.com/joho/godotenv"
+	"github.com/pkg/errors"
 )
 
 type Config struct {
@@ -19,10 +21,10 @@ type Config struct {
 
 func InitConfig() (*Config, error) {
 
-	// err := godotenv.Load()
-	// if err != nil {
-	// 	return nil, errors.Wrap(err, "godotenv.Load")
-	// }
+	err := godotenv.Load()
+	if err != nil {
+		return nil, errors.Wrap(err, "godotenv.Load")
+	}
 
 	cfg := &Config{}
 

@@ -11,5 +11,5 @@ const (
 	NatsAddress           = "NATS_ADDRESS"
 	ElasticsearchAddress  = "ELASTICSEARCH_ADDRESS"
 	ElasticsearchUsername = "ELASTICSEARCH_USERNAME"
-	ElasticsearchPassword = "ELASTICSEARCH_USERNAME"
+	ElasticsearchPassword = "ELASTICSEARCH_PASSWORD"
 )

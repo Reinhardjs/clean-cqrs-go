@@ -24,6 +24,7 @@ To run `command-service`
 ```
 go run command-service/cmd/main.go
 ```
+
 available endpoints :
 - `POST` /articles
 
@@ -33,6 +34,7 @@ To run `query-service`
 ```
 go run query-service/cmd/main.go
 ```
+
 available endpoints :
 - `GET` /articles
 - `GET` /articles/search?query=your-query-here
@@ -46,4 +48,9 @@ available endpoints :
 ```
 docker compose up
 ```
+
+available endpoints :
+- `POST` /articles
+- `GET` /articles
+- `GET` /articles/search?query=your-query-here
 

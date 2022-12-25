@@ -1,6 +1,8 @@
 # Clean & CQRS Architecture with Go
 
 ## Running in local
+If you want to run this project on your local machine, do the followings
+
 ### Run each service in separates (without using docker compose)
 
 ```
@@ -15,19 +17,31 @@ go mod download
 go mod tidy
 ```
 
+<br>
+<br>
+
 To run `command-service`
 ```
 go run command-service/cmd/main.go
 ```
-Then open `localhost:8080` on your browser
+available endpoints :
+- `POST` /articles
+
+<br>
 
 To run `query-service` 
 ```
 go run query-service/cmd/main.go
 ```
-Then open `localhost:8080` on your browser
+available endpoints :
+- `GET` /articles
+- `GET` /articles/search?query=your-query-here
 
-### Runing all in one using docker compoes (merged port with nginx reverse proxy)
+<br>
+<br>
+
+
+### Runing all in one using docker compose (merged port with nginx reverse proxy)
 
 ```
 docker compose up

@@ -2,7 +2,7 @@
 
 This is a simple Rest API of articles, built with CQRS and Clean Architecture implemented.
 
-![image](https://user-images.githubusercontent.com/7758970/209476768-17f067ba-200c-416e-a016-ff48622b8345.png)
+![image](https://user-images.githubusercontent.com/7758970/209476984-88fed3c1-31cc-4ed0-bfed-a401a5226c3f.png)
 
 #### Built With
 

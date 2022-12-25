@@ -26,7 +26,7 @@ go run command-service/cmd/main.go
 ```
 
 available endpoints :
-- `POST` /articles
+- `POST` localhost:8080/articles
 
 <br>
 
@@ -36,8 +36,8 @@ go run query-service/cmd/main.go
 ```
 
 available endpoints :
-- `GET` /articles
-- `GET` /articles/search?query=your-query-here
+- `GET` localhost:8080/articles
+- `GET` localhost:8080/articles/search?query=your-query-here
 
 <br>
 <br>
@@ -50,7 +50,7 @@ docker compose up
 ```
 
 available endpoints :
-- `POST` /articles
-- `GET` /articles
-- `GET` /articles/search?query=your-query-here
+- `POST` localhost:8080/articles
+- `GET` localhost:8080/articles
+- `GET` localhost:8080/articles/search?query=your-query-here
 

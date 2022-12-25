@@ -50,7 +50,7 @@ func (r *elasticSearchRepository) SearchArticles(ctx context.Context, query stri
 		"query": map[string]interface{}{
 			"multi_match": map[string]interface{}{
 				"query":            query,
-				"fields":           []string{"content"},
+				"fields":           []string{"content", "title"},
 				"fuzziness":        3,
 				"cutoff_frequency": 0.0001,
 			},

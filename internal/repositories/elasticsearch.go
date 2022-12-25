@@ -22,9 +22,9 @@ type elasticSearchRepository struct {
 	client *elastic.Client
 }
 
-func NewElastic(client *elastic.Client) (ElasticSearchRepository, error) {
+func NewElasticRepository(client *elastic.Client) ElasticSearchRepository {
 
-	return &elasticSearchRepository{client}, nil
+	return &elasticSearchRepository{client}
 }
 
 func (r *elasticSearchRepository) Close() {

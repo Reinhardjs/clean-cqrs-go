@@ -1,7 +1,5 @@
 # Clean CQRS Architecture with Go
 
-This is a simple Rest API, built with CQRS and Clean Architecture implemented.
-
 ![image](https://user-images.githubusercontent.com/7758970/209476984-88fed3c1-31cc-4ed0-bfed-a401a5226c3f.png)
 
 #### Built With

@@ -10,7 +10,7 @@ This is a simple articles rest api built with the implementation of CQRS and Cle
 * Gorm
 * Docker
 * Docker Compose
-* Nginx
+* Nginx Reverse Proxy
 
 #### Stacks
 * Redis

@@ -45,6 +45,7 @@ func main() {
 		// Index article for searching
 		article := models.Article{
 			ID:        m.ID,
+			Title:     m.Title,
 			Content:   m.Content,
 			CreatedAt: m.CreatedAt,
 			UpdatedAt: m.UpdatedAt,

@@ -1,5 +1,24 @@
 # Clean & CQRS Architecture with Go
 
+This is a simple articles rest api built with the implementation of CQRS and Clean Architecture.
+
+<br>
+
+#### Built With
+
+* Go (Mux)
+* Gorm
+* Docker
+* Docker Compose
+
+#### Stacks
+* Redis
+* PostgreDB
+* Nats Streaming
+* ElasticSearch
+
+<br>
+
 ## Running in local
 If you want to run this project on your local machine, do the followings
 

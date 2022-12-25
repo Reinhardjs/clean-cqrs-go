@@ -1,9 +1,7 @@
 package main
 
 import (
-	"context"
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/Reinhardjs/golang-alpha-indo-soft/command-service/config"
@@ -14,7 +12,6 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/pkg/errors"
 
-	"github.com/Reinhardjs/golang-alpha-indo-soft/internal/models"
 	commonRepositories "github.com/Reinhardjs/golang-alpha-indo-soft/internal/repositories"
 )
 
@@ -35,30 +32,9 @@ func main() {
 
 	// Instantiate repositories
 	natsRepository := commonRepositories.NewNatsRepository(s.NatsConn)
-	searchRepository := commonRepositories.NewElasticRepository(s.ElasticSearchClient)
 	articleRepository := repositories.NewArticleRepository(s.PostgresConn, s.RedisConn)
 	articleUsecase := usecases.NewArticleUsecase(articleRepository, natsRepository)
 	articleController := articleHttp.CreateArticleController(articleUsecase)
-
-	// --- Consume Nats Start ---
-	err = natsRepository.OnArticleCreated(func(m models.ArticleCreatedMessage) {
-		// Index article for searching
-		article := models.Article{
-			ID:        m.ID,
-			Title:     m.Title,
-			Content:   m.Content,
-			CreatedAt: m.CreatedAt,
-			UpdatedAt: m.UpdatedAt,
-		}
-		if err := searchRepository.InsertArticle(context.Background(), article); err != nil {
-			log.Println(err)
-		}
-		log.Println(m)
-	})
-	if err != nil {
-		log.Println(err)
-	}
-	// --- Consume Nats End ---
 
 	// Initiating Article's Command Service
 	router := mux.NewRouter()

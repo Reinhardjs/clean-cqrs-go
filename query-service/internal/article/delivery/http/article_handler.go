@@ -14,7 +14,7 @@ import (
 	"github.com/Reinhardjs/golang-alpha-indo-soft/internal/dto"
 	pkgErrors "github.com/Reinhardjs/golang-alpha-indo-soft/pkg/errors"
 	"github.com/Reinhardjs/golang-alpha-indo-soft/query-service/internal/article/usecases"
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 type ArticleController struct {

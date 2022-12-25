@@ -2,6 +2,21 @@ version: "3.7"
 
 services:
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.0
+    ports:
+      - 9200:9200
+    environment:
+      - discovery.type=single-node
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - command
+      - query
+
   command:
     container_name: command-service
     build:
@@ -17,19 +32,13 @@ services:
       REDIS_HOST: "103.134.154.18"
       REDIS_PORT: "6379"
       NATS_ADDRESS: "http://103.134.154.18:31071"
-      ELASTICSEARCH_ADDRESS: "https://my-deployment-2e0b30.es.asia-southeast1.gcp.elastic-cloud.com"
+      ELASTICSEARCH_ADDRESS: "http://elasticsearch:9200"
       ELASTICSEARCH_USERNAME: "elastic"
       ELASTICSEARCH_PASSWORD: "dBSqLPX1mKaUF6ezas8bvjMK"
     ports:
       - 8080
-
-  nginx:
-    build: ./nginx
-    ports:
-      - "8080:80"
     depends_on:
-      - command
-      - query
+      - elasticsearch
 
   query:
     container_name: query-service
@@ -46,8 +55,10 @@ services:
       REDIS_HOST: "103.134.154.18"
       REDIS_PORT: "6379"
       NATS_ADDRESS: "http://103.134.154.18:31071"
-      ELASTICSEARCH_ADDRESS: "https://my-deployment-2e0b30.es.asia-southeast1.gcp.elastic-cloud.com"
+      ELASTICSEARCH_ADDRESS: "http://elasticsearch:9200"
       ELASTICSEARCH_USERNAME: "elastic"
       ELASTICSEARCH_PASSWORD: "dBSqLPX1mKaUF6ezas8bvjMK"
     ports:
       - 8080
+    depends_on:
+      - elasticsearch

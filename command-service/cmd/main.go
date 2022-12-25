@@ -52,6 +52,7 @@ func main() {
 		if err := searchRepository.InsertArticle(context.Background(), article); err != nil {
 			log.Println(err)
 		}
+		log.Println(m)
 	})
 	if err != nil {
 		log.Println(err)

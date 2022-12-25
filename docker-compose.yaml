@@ -2,10 +2,6 @@ version: "3.7"
 
 services:
 
-  # nats:
-  #   image: nats-streaming:0.17.0
-  #   restart: always
-
   command:
     container_name: command-service
     build:

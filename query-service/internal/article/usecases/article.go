@@ -1,21 +1,26 @@
 package usecases
 
 import (
+	"context"
+
 	"github.com/Reinhardjs/golang-alpha-indo-soft/internal/models"
+	commonRepositories "github.com/Reinhardjs/golang-alpha-indo-soft/internal/repositories"
 	"github.com/Reinhardjs/golang-alpha-indo-soft/query-service/internal/article/repositories"
 )
 
 type ArticleUsecase interface {
 	ReadAll() (*[]models.Article, error)
 	ReadById(id int) (*models.Article, error)
+	Search(query string) (*[]models.Article, error)
 }
 
 type articleUsecase struct {
-	articleRepo repositories.ArticleRepository
+	articleRepo       repositories.ArticleRepository
+	elasticSearchRepo commonRepositories.ElasticSearchRepository
 }
 
-func NewArticleUsecase(articleRepo repositories.ArticleRepository) ArticleUsecase {
-	return &articleUsecase{articleRepo}
+func NewArticleUsecase(articleRepo repositories.ArticleRepository, elasticSearchRepo commonRepositories.ElasticSearchRepository) ArticleUsecase {
+	return &articleUsecase{articleRepo, elasticSearchRepo}
 }
 
 func (e *articleUsecase) ReadAll() (*[]models.Article, error) {
@@ -24,4 +29,8 @@ func (e *articleUsecase) ReadAll() (*[]models.Article, error) {
 
 func (e *articleUsecase) ReadById(id int) (*models.Article, error) {
 	return e.articleRepo.ReadById(id)
+}
+
+func (e *articleUsecase) Search(query string) (*[]models.Article, error) {
+	return e.elasticSearchRepo.SearchArticles(context.Background(), query, uint64(0), uint64(100))
 }

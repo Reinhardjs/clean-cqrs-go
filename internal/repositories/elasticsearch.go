@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"log"
 
 	"github.com/pkg/errors"
 
@@ -15,7 +16,7 @@ import (
 type ElasticSearchRepository interface {
 	Close()
 	InsertArticle(ctx context.Context, article models.Article) error
-	SearchArticles(ctx context.Context, query string, skip uint64, take uint64) ([]models.Article, error)
+	SearchArticles(ctx context.Context, query string, skip uint64, take uint64) (*[]models.Article, error)
 }
 
 type elasticSearchRepository struct {
@@ -32,30 +33,31 @@ func (r *elasticSearchRepository) Close() {
 
 func (r *elasticSearchRepository) InsertArticle(ctx context.Context, article models.Article) error {
 	body, _ := json.Marshal(article)
-	_, err := r.client.Index(
+	res, err := r.client.Index(
 		"articles",
 		bytes.NewReader(body),
 		r.client.Index.WithDocumentID(article.ID),
 		r.client.Index.WithRefresh("wait_for"),
 	)
+	log.Println(res)
 	return err
 }
 
-func (r *elasticSearchRepository) SearchArticles(ctx context.Context, query string, skip uint64, take uint64) (result []models.Article, err error) {
+func (r *elasticSearchRepository) SearchArticles(ctx context.Context, query string, skip uint64, take uint64) (result *[]models.Article, err error) {
 	var buf bytes.Buffer
 
 	reqBody := map[string]interface{}{
 		"query": map[string]interface{}{
 			"multi_match": map[string]interface{}{
 				"query":            query,
-				"fields":           []string{"body"},
+				"fields":           []string{"content"},
 				"fuzziness":        3,
 				"cutoff_frequency": 0.0001,
 			},
 		},
 	}
 	if err = json.NewEncoder(&buf).Encode(reqBody); err != nil {
-		return nil, errors.Wrap(err, "query-service.article.repository.elasticsearch.json.encode")
+		return &[]models.Article{}, errors.Wrap(err, "query-service.article.repository.elasticsearch.json.encode")
 	}
 
 	res, err := r.client.Search(
@@ -67,7 +69,7 @@ func (r *elasticSearchRepository) SearchArticles(ctx context.Context, query stri
 		r.client.Search.WithTrackTotalHits(true),
 	)
 	if err != nil {
-		return nil, errors.Wrap(err, "query-service.article.repository.elasticsearch.client.Search")
+		return &[]models.Article{}, errors.Wrap(err, "query-service.article.repository.elasticsearch.client.Search")
 	}
 
 	defer func() {
@@ -77,7 +79,7 @@ func (r *elasticSearchRepository) SearchArticles(ctx context.Context, query stri
 	}()
 
 	if res.IsError() {
-		return nil, errors.Wrap(errors.New("elastic search failed"), "query-service.article.repository.elasticsearch.client.search.res.isError")
+		return &[]models.Article{}, errors.Wrap(errors.New("elastic search failed"), "query-service.article.repository.elasticsearch.client.search.res.isError")
 	}
 
 	type Response struct {
@@ -94,7 +96,7 @@ func (r *elasticSearchRepository) SearchArticles(ctx context.Context, query stri
 
 	resBody := Response{}
 	if err := json.NewDecoder(res.Body).Decode(&resBody); err != nil {
-		return nil, errors.Wrap(err, "query-service.article.repository.elasticsearch.json.decode")
+		return &[]models.Article{}, errors.Wrap(err, "query-service.article.repository.elasticsearch.json.decode")
 	}
 
 	var articles []models.Article
@@ -102,5 +104,5 @@ func (r *elasticSearchRepository) SearchArticles(ctx context.Context, query stri
 		articles = append(articles, hit.Source)
 	}
 
-	return articles, nil
+	return &articles, nil
 }

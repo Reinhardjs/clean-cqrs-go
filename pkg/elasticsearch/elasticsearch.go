@@ -6,12 +6,18 @@ import (
 )
 
 type Config struct {
-	Url string
+	Url      string
+	Username string
+	Password string
 }
 
 func NewElasticSearchClient(cfg *Config) (*elastic.Client, error) {
 	client, err := elastic.NewClient(elastic.Config{
-		Addresses: []string{cfg.Url},
+		Addresses: []string{
+			cfg.Url,
+		},
+		Username: cfg.Username,
+		Password: cfg.Password,
 	})
 	if err != nil {
 		return nil, errors.Wrap(err, "pkg.elasticsearch.NewClient")

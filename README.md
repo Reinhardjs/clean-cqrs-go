@@ -74,3 +74,12 @@ available endpoints :
 - `GET` localhost:8080/articles
 - `GET` localhost:8080/articles/search?query=your-query-here
 
+<br>
+
+### Example Request Body Payload for `POST` /articles :
+```
+{
+    "title": "this is title 123",
+    "content": "this is content 123"
+}
+```

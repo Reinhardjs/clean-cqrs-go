@@ -37,7 +37,7 @@ func (e *articleRepository) ReadAll() (*[]models.Article, error) {
 
 	if redisResult == nil {
 
-		err := e.DB.Table("articles").Find(&articles).Error
+		err := e.DB.Table("articles").Order("id desc").Find(&articles).Error
 		if err != nil {
 			return nil, errors.Wrap(err, "query-service.article.repository.DB.findAll")
 		}

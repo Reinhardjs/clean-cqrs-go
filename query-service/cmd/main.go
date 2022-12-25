@@ -35,7 +35,7 @@ func main() {
 
 	router := mux.NewRouter()
 
-	router.Handle("/posts", articleController.GetArticles()).Methods("POST")
+	router.Handle("/articles", articleController.GetArticles()).Methods("GET")
 
 	fmt.Println("starting web server at http://localhost:8080")
 	http.ListenAndServe(":8080", router)

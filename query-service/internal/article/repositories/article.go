@@ -6,8 +6,8 @@ import (
 
 	"github.com/Reinhardjs/golang-alpha-indo-soft/internal/models"
 	"github.com/gomodule/redigo/redis"
-	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
+	"gorm.io/gorm"
 )
 
 type ArticleRepository interface {

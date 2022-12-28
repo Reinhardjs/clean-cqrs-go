@@ -4,15 +4,15 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Reinhardjs/golang-alpha-indo-soft/command-service/config"
-	articleHttp "github.com/Reinhardjs/golang-alpha-indo-soft/command-service/internal/article/delivery/http"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/command-service/internal/article/repositories"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/command-service/internal/article/usecases"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/command-service/internal/server"
+	"github.com/Reinhardjs/clean-cqrs-go/command-service/config"
+	articleHttp "github.com/Reinhardjs/clean-cqrs-go/command-service/internal/article/delivery/http"
+	"github.com/Reinhardjs/clean-cqrs-go/command-service/internal/article/repositories"
+	"github.com/Reinhardjs/clean-cqrs-go/command-service/internal/article/usecases"
+	"github.com/Reinhardjs/clean-cqrs-go/command-service/internal/server"
 	"github.com/gorilla/mux"
 	"github.com/pkg/errors"
 
-	commonRepositories "github.com/Reinhardjs/golang-alpha-indo-soft/internal/repositories"
+	commonRepositories "github.com/Reinhardjs/clean-cqrs-go/internal/repositories"
 )
 
 func main() {

@@ -6,16 +6,16 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Reinhardjs/golang-alpha-indo-soft/query-service/config"
-	articleHttp "github.com/Reinhardjs/golang-alpha-indo-soft/query-service/internal/article/delivery/http"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/query-service/internal/article/repositories"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/query-service/internal/article/usecases"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/query-service/internal/server"
+	"github.com/Reinhardjs/clean-cqrs-go/query-service/config"
+	articleHttp "github.com/Reinhardjs/clean-cqrs-go/query-service/internal/article/delivery/http"
+	"github.com/Reinhardjs/clean-cqrs-go/query-service/internal/article/repositories"
+	"github.com/Reinhardjs/clean-cqrs-go/query-service/internal/article/usecases"
+	"github.com/Reinhardjs/clean-cqrs-go/query-service/internal/server"
 	"github.com/gorilla/mux"
 	"github.com/pkg/errors"
 
-	"github.com/Reinhardjs/golang-alpha-indo-soft/internal/models"
-	commonRepositories "github.com/Reinhardjs/golang-alpha-indo-soft/internal/repositories"
+	"github.com/Reinhardjs/clean-cqrs-go/internal/models"
+	commonRepositories "github.com/Reinhardjs/clean-cqrs-go/internal/repositories"
 )
 
 func main() {

@@ -1,4 +1,4 @@
-module github.com/Reinhardjs/golang-alpha-indo-soft
+module github.com/Reinhardjs/clean-cqrs-go
 
 go 1.16
 

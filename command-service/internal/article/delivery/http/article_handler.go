@@ -6,11 +6,11 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Reinhardjs/golang-alpha-indo-soft/command-service/internal/article/usecases"
-	internalHttp "github.com/Reinhardjs/golang-alpha-indo-soft/internal/delivery/http"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/internal/dto"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/internal/models"
-	pkgErrors "github.com/Reinhardjs/golang-alpha-indo-soft/pkg/errors"
+	"github.com/Reinhardjs/clean-cqrs-go/command-service/internal/article/usecases"
+	internalHttp "github.com/Reinhardjs/clean-cqrs-go/internal/delivery/http"
+	"github.com/Reinhardjs/clean-cqrs-go/internal/dto"
+	"github.com/Reinhardjs/clean-cqrs-go/internal/models"
+	pkgErrors "github.com/Reinhardjs/clean-cqrs-go/pkg/errors"
 )
 
 type ArticleController struct {

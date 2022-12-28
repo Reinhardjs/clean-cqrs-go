@@ -1,11 +1,11 @@
 package server
 
 import (
-	pkgElasticSearch "github.com/Reinhardjs/golang-alpha-indo-soft/pkg/elasticsearch"
-	pkgNats "github.com/Reinhardjs/golang-alpha-indo-soft/pkg/nats"
-	pkgPostgres "github.com/Reinhardjs/golang-alpha-indo-soft/pkg/postgres"
-	pkgRedis "github.com/Reinhardjs/golang-alpha-indo-soft/pkg/redis"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/query-service/config"
+	pkgElasticSearch "github.com/Reinhardjs/clean-cqrs-go/pkg/elasticsearch"
+	pkgNats "github.com/Reinhardjs/clean-cqrs-go/pkg/nats"
+	pkgPostgres "github.com/Reinhardjs/clean-cqrs-go/pkg/postgres"
+	pkgRedis "github.com/Reinhardjs/clean-cqrs-go/pkg/redis"
+	"github.com/Reinhardjs/clean-cqrs-go/query-service/config"
 	elastic "github.com/elastic/go-elasticsearch/v7"
 	"github.com/gomodule/redigo/redis"
 	"github.com/nats-io/nats.go"

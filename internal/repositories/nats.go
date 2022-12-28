@@ -5,7 +5,7 @@ import (
 	"encoding/gob"
 	"log"
 
-	"github.com/Reinhardjs/golang-alpha-indo-soft/internal/models"
+	"github.com/Reinhardjs/clean-cqrs-go/internal/models"
 	"github.com/nats-io/nats.go"
 )
 

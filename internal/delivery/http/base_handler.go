@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Reinhardjs/golang-alpha-indo-soft/pkg/errors"
+	"github.com/Reinhardjs/clean-cqrs-go/pkg/errors"
 )
 
 type RootHandler func(w http.ResponseWriter, r *http.Request) error

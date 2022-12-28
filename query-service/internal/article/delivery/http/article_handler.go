@@ -10,10 +10,10 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/pkg/errors"
 
-	internalHttp "github.com/Reinhardjs/golang-alpha-indo-soft/internal/delivery/http"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/internal/dto"
-	pkgErrors "github.com/Reinhardjs/golang-alpha-indo-soft/pkg/errors"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/query-service/internal/article/usecases"
+	internalHttp "github.com/Reinhardjs/clean-cqrs-go/internal/delivery/http"
+	"github.com/Reinhardjs/clean-cqrs-go/internal/dto"
+	pkgErrors "github.com/Reinhardjs/clean-cqrs-go/pkg/errors"
+	"github.com/Reinhardjs/clean-cqrs-go/query-service/internal/article/usecases"
 	"gorm.io/gorm"
 )
 

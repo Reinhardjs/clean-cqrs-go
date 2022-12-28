@@ -3,9 +3,9 @@ package usecases
 import (
 	"context"
 
-	"github.com/Reinhardjs/golang-alpha-indo-soft/internal/models"
-	commonRepositories "github.com/Reinhardjs/golang-alpha-indo-soft/internal/repositories"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/query-service/internal/article/repositories"
+	"github.com/Reinhardjs/clean-cqrs-go/internal/models"
+	commonRepositories "github.com/Reinhardjs/clean-cqrs-go/internal/repositories"
+	"github.com/Reinhardjs/clean-cqrs-go/query-service/internal/article/repositories"
 )
 
 type ArticleUsecase interface {

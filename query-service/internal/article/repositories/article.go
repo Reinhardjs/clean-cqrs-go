@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"strconv"
 
-	"github.com/Reinhardjs/golang-alpha-indo-soft/internal/models"
+	"github.com/Reinhardjs/clean-cqrs-go/internal/models"
 	"github.com/gomodule/redigo/redis"
 	"github.com/pkg/errors"
 	"gorm.io/gorm"

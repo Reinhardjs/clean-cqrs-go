@@ -3,11 +3,11 @@ package config
 import (
 	"os"
 
-	"github.com/Reinhardjs/golang-alpha-indo-soft/pkg/constants"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/pkg/elasticsearch"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/pkg/nats"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/pkg/postgres"
-	"github.com/Reinhardjs/golang-alpha-indo-soft/pkg/redis"
+	"github.com/Reinhardjs/clean-cqrs-go/pkg/constants"
+	"github.com/Reinhardjs/clean-cqrs-go/pkg/elasticsearch"
+	"github.com/Reinhardjs/clean-cqrs-go/pkg/nats"
+	"github.com/Reinhardjs/clean-cqrs-go/pkg/postgres"
+	"github.com/Reinhardjs/clean-cqrs-go/pkg/redis"
 	"github.com/joho/godotenv"
 	"github.com/pkg/errors"
 )

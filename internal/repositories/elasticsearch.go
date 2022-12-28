@@ -8,7 +8,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/Reinhardjs/golang-alpha-indo-soft/internal/models"
+	"github.com/Reinhardjs/clean-cqrs-go/internal/models"
 
 	elastic "github.com/elastic/go-elasticsearch/v7"
 )

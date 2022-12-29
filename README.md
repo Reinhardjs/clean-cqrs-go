@@ -69,7 +69,7 @@ available endpoints :
 <br>
 
 
-### Runing all in one using docker compose (merged port with nginx reverse proxy)
+## Runing all in one using docker compose (merged port with nginx reverse proxy)
 
 ```
 docker compose up

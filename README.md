@@ -18,14 +18,6 @@
 
 <br>
 
-## Run from deployed
-
-Temporarily, i've deployed this project to my personal VPS. You can access from the host of `http://103.134.154.18`.
-
-For example, if you want to get list of article, access `http://103.134.154.18:8080/articles`
-
-<br>
-
 ## Running in local
 If you want to run this project on your local machine, do the followings
 
